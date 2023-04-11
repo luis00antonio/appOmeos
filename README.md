@@ -1,4 +1,4 @@
-# appOmeos
+# app Omeos
 Aplicación sobre remedios naturales.
 
 # Módulos
