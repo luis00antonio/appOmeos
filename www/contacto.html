@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="description" content="Sitio dedicado a la utilización de remedios naturales para mejorar la vida de las personas">
+    <meta name="author" content="Luis Antonio López, LAL">
+    <link rel="icon" href="img/iconos/ldpi.png" type="img/png">
+    <link rel="stylesheet" href="css/indexStyle.css" type="text/css">
+    <title>Contacto</title>
+</head>
+<body>
+    <div class="formul">
+        <form id="form1">
+            <textarea id="fasunto" name="fasunto" rows="1" placeholder=" Asunto:"></textarea>
+            <br><br>
+            <textarea id="ftexto" name="ftexto" rows="10" placeholder=" Mensaje:"></textarea>
+            <br><br>
+        </form>
+        <a id="mail" href="javascript:;" onclick="enviarCorreo();" role="button"><h2 class="boton"><img class="iconos" src="img/iconos/sobre.png" alt="sobre" type="img/png">ENVIAR</h2></a>
+    </div>
+    <footer>
+        <a href="index.html"><h3 class="volver"><img class="iconos" src="img/iconos/volver.png" alt="flechaVolver" type="img/png">VOLVER</h3></a>
+    </footer>
+</body>
+<script type="application/javascript" src="js/correo.js"></script>
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "www.omeos.es",
+  "displayName": "Omeos",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^10.1.2",
+    "cordova-plugin-androidx": "file:../../cordova-plugin-androidx-master",
+    "cordova-plugin-badge": "file:../../cordova-plugin-badge-master",
+    "cordova-plugin-device": "^2.1.0",
+    "cordova-plugin-local-notification": "file:../../cordova-plugin-local-notifications-master",
+    "cordova-plugin-x-socialsharing": "file:../../SocialSharing-PhoneGap-Plugin-master",
+    "es6-promise-plugin": "^4.2.2"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-androidx": {},
+      "cordova-plugin-local-notification": {
+        "ANDROID_SUPPORT_V4_VERSION": "26.+"
+      },
+      "cordova-plugin-badge": {},
+      "cordova-plugin-x-socialsharing": {}
+    }
+  }
+}

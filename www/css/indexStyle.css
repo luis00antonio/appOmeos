@@ -1,0 +1,400 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-image: url(../img/fondos/fondo.jpg);
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    margin:0;
+    padding:0;
+    height: 100%;
+}
+@media only screen and (orientation: landscape) {
+  body {
+    background-image: url(../img/fondos/fondoG.jpg)
+  }
+}
+header {
+    height: 15vh;
+    width: 100%;
+    display: block;
+}
+    img.iconosID {
+        display: inline;
+    }
+
+    .app {
+        background:url(../img/logos/logo_sinvip.png) no-repeat center top;
+        height:30vh;                   
+        width:100%;                 
+        text-align:center;
+        display:block;
+    }
+    @media only screen and (max-height: 520px) {
+        .app {
+            background:url(../img/logos/logo2_sinvip.png) no-repeat center top;
+        }
+    }
+    @media only screen and (max-width: 440px) {
+        .app {
+            background:url(../img/logos/logo2_sinvip.png) no-repeat center top;
+        }    
+    }
+    .tit {
+        height: 8vh;
+        background-color: #1A670D;
+    }
+    .titulo {
+        width: 100%;
+        font-weight: bold;
+        margin: 0;
+        text-align: center;
+        background-color: #1A670D;
+        color: #ffffff;
+        padding-top: 0.4em;
+        padding-bottom: 0.4em;
+        font-size: 1.4em;
+    }
+    @media only screen and (max-height: 450px) {
+        .titulo {
+            font-size: 1.2em;
+        }
+        #buscador input {
+            font-size: 1.2em;
+        }
+    }
+    @media only screen and (max-width: 440px){
+        .titulo {
+            font-size: 1.2em;
+        }
+        #buscador input {
+            font-size: 1.2em;
+        }  
+    }
+    .buscador {
+        width: 100%;
+        border: none;
+        margin:0;
+        height: 7vh;
+    }
+    #buscador {
+        background-color: white;
+        display: inline-flex;  
+    }
+    #buscador input {
+        background-color: transparent;
+        width: 100%;
+        color: #1A670D !important;
+        font-weight: bold;
+        font-size: 1.4em;
+        padding-left: 1em;
+        box-sizing: content-box;
+        border: none;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+    }
+    #buscador input::placeholder {
+        color: #48c234;
+    }
+    #lupa {
+        padding:0.2em 1em;
+    }
+    #pregunta {
+        display: none;
+    }
+    .textoPreg {
+        width: 60%;
+    }
+    .botonSi {
+        width: 20%;
+    }
+    .botonNo {
+        width: 20%;
+    }
+
+main {
+    height:50vh;
+    width:100%;
+    display: block;
+}
+    .rem {
+        overflow-y: auto;
+        height: 77vh;
+    }
+    .botonera {
+        height: 55vh;
+        display: block;
+    }
+    .alarma {
+        height: 55vh;
+        display: none;
+    }
+    img.iconos {
+        float: left;
+        padding-left: 1em;
+    }
+
+    .boton {
+        background-color: #48c234;
+        color: #ffffff;
+        width: 100%;
+        padding-top: 0.4em;
+        padding-bottom: 0.4em;
+        border: none;
+        text-align: center;
+        font-size: 1.4em;
+        font-weight: bold;
+        margin:0;
+    }
+    @media only screen and (max-height: 520px) {
+        .boton {
+            font-size: 0.9em;
+        }
+    }
+    @media only screen and (max-width: 440px) {
+        .boton {
+            font-size: 0.9em;
+        }
+    }
+    .cajaBot {
+        left: 15%;
+        width: 70%;
+        position: relative;
+        padding: 0;
+        display: inline-block;
+        margin-bottom: 2em;
+        border-radius: 0.3em;
+        background-color: #48c234;
+    }
+
+    a:link {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    /* visited link */
+    a:visited {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    /* mouse over link */
+    a:hover {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    /* selected link */
+    a:active {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+    ul {
+        width: 100%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        font-size: 1.4em;
+        padding: 0.5em;
+        text-transform: none;
+    }
+    ul li:nth-child(odd) {
+        background-color: #48c234;
+    }
+    ul li:nth-child(even) {
+        background-color: #a6f191;
+    }
+    li a:link {
+        text-decoration: none;
+        color: #1a670d;
+    }
+    li a:visited {
+        color: #1a670d;
+    }
+    .parr {
+        color:white;
+        top: 5vh;
+        height: 80vh;
+        width: 80%;
+        right: 10%;
+        left: 10%;
+        padding: 1em;
+        background-color: #48c234;
+        border-radius: 0.3em;
+        position: relative;
+        overflow-y: scroll;
+    }
+    .parr2 {
+        color: white;
+        width: 80%;
+        left: 10%;
+        right: 10%;
+        position: relative;
+        background-color: #48c234;
+        border-radius: 0.3em;
+        padding: 0.1em 1em 0.2em 1em;
+    }
+    .imagen {
+        position: relative;
+        height: 50vh;
+        width: 80%;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+    }
+    img.inst {
+        position: relative;
+        max-width: 80%;
+        height: 100%;
+        left: 10%;
+        right: 10%;
+    }
+    .textImpreg {
+        width: 100%;
+        height: 7vh;
+    }
+    .imgImpreg {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 40vh;
+    }
+    img.carga {
+        display: block;
+        margin: auto;
+        position: relative;
+        width: auto;
+        height: 40vh;
+    }
+    #impreg {
+        position: absolute;
+        top: 40%;
+    }
+    .formul {
+        top: 10vh;
+        height: 75vh;
+        width: 70%;
+        left: 15%;
+        right: 15%;
+        position:relative;
+    }
+            form {
+                width: 100%;
+            }
+            textarea {
+            width: 100%;
+            background-color: #ffffff;
+            padding-left: 0;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            padding-right: 0;
+            font-size: 1.2em;
+            color: #000000;
+            border: none;
+            border-radius: 0.3em;
+            position: relative;
+        }
+
+footer {
+    display: inline-flex;
+    height: 8vh;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+}
+    h3 {
+        text-align: center;
+        color: #167007;
+        width: 100%;
+        margin: 0;
+    }
+    .volver {
+        position: fixed;
+        bottom: 0;
+        background-color: #48c234;
+        color: #ffffff;
+        width: 100%;
+        border: none;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+        text-align: center;
+        margin: 0;
+        font-size: 1.4em;
+    }
+    @media only screen and (max-height: 520px) {
+        .volver {
+            font-size: 1.2em;
+        }
+    }
+    @media only screen and (max-width: 440px) {
+        .volver {
+            font-size: 1.2em;
+        }
+    }
+
+/* Tabla de selección de diluciones */
+.select {
+    height: 22vh;
+    display: block;
+    width: 100%;
+    overflow:hidden;
+}
+.titSelect {
+    height: 4vh;
+}
+.cuadrosSelect {
+    height: 18vh;
+}
+.select1 {
+    left: 0;
+    height: 18vh;
+    width: 50%;
+    position: absolute;
+}
+.select2 {
+    left: 50vw;
+    height: 18vh;
+    width: 50%;
+    position: absolute;
+}
+.select3 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.tabla {
+    position: relative;
+    max-height: 12vh;
+    overflow: auto;
+    left: 25%;
+    width: 50%;
+    right: 25%;
+    padding: 0 0;
+    border: 0.1em solid black;
+    outline: 0.3em solid green;
+    background: linear-gradient(#155f09, #d0f7ce, #155f09);
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+}
+table {
+    width: 100%;
+
+}
+tr {
+    width: 100%;
+    min-height: 4vh;
+    scroll-snap-align: center;
+}
+td {
+    width: 100%;
+    font-size: 1em;
+    text-align: center;
+}
+tbody {
+    max-height: 12vh;
+    overflow: auto;
+}
+
