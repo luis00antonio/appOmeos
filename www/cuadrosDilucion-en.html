@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, width=device-width">
@@ -351,7 +351,7 @@
                 <a href="javascript:;" onclick="cambiarBotones();"><div class="boton"><img class="iconos" src="img/iconos/reloj.png" alt="reloj" type="img/png">SCHEDULE TAKEN</div></a>
             </div>
             <div class="cajaBot">
-                <a id="botPrepCapt" href="javascript:;" onclick="prepCapt();" role="button"><div class="boton"><img class="iconos" src="img/iconos/whatsapp26.png" alt="whatsapp" type="img/png">SEND TO FRIEND</div></a>
+                <a id="botPrepCapt" href="javascript:;" onclick="draw();" role="button"><div class="boton"><img class="iconos" src="img/iconos/whatsapp26.png" alt="whatsapp" type="img/png">SEND TO FRIEND</div></a>
             </div>
         </div>
         <div class="alarma" id="alarma">
@@ -431,6 +431,7 @@
             <br>
             <h3 id="textoSalida"></h3>         
         </div>
+        <canvas id="canvas" width="275" height="315"></canvas>
     </main>
     <footer>
         <a href="index-en.html"><h3 class="volver"><img class="iconos" src="img/iconos/volver.png" alt="flechaVolver" type="img/png">BACK TO MENU</h3></a>
@@ -439,4 +440,11 @@
 <script language="javascript" type="text/javascript" src="js/cDilucion-en.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="application/javascript" src="lib/SocialSharing.js"></script>
+<script type="application/javascript" src="lib/gif.worker.js"></script>
+<script type="application/javascript" src="lib/gif.js"></script>
+<script type="application/javascript" src="lib/LZWEncoder.js"></script>
+<script type="application/javascript" src="lib/NeuQuant.js"></script>
+<script type="application/javascript" src="lib/GIFEncoder.js"></script>
+<script type="application/javascript" src="lib/b64.js"></script>
 </html>
