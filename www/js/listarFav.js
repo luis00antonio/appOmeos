@@ -21,7 +21,6 @@ window.onload = () => {
         transaction.onerror = () => {
         	console.log('error en la transacción');
         };
-        console.log(transaction);
         var objectStore = transaction.objectStore('favoritos');
         var myIndex = objectStore.index('remedio');
 
@@ -86,7 +85,6 @@ function eliminarFav(keyP) {
 function eliminar() {
     const request = db.transaction(['favoritos'], 'readwrite').objectStore('favoritos').delete(keyP2);
     request.onsuccess = (event) => {
-        console.log("se ha ido!");
     }
     window.location.reload();
 }; 

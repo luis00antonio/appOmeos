@@ -42,7 +42,6 @@ window.onload = () => {
             }
         };
     };
-
 }
 // Manejador del buscador
 var filtrar = () => {
@@ -70,7 +69,6 @@ var filtrar = () => {
 };
 lectorChar.addEventListener('keyup', filtrar);
 } else {
-    console.log('estoy aqui');
     var mensj = 'App is out of date. Install the new version';
     list.innerHTML = '';
     var listItem = document.createElement('li');

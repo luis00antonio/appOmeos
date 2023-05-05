@@ -1,6 +1,10 @@
 var db;
 var list = document.querySelector('ul');
 var lectorChar = document.querySelector('#lectorChar');
+var keyP; 
+var keyP2;
+var busca = document.getElementById("buscador");
+var preg = document.getElementById("pregunta");
 
 window.onload = () => {
     var DBOpenRequest = window.indexedDB.open('remediosDB', 1);
@@ -9,9 +13,6 @@ window.onload = () => {
     };
     DBOpenRequest.onsuccess = (event) => {
     	db = event.target.result;
-    	console.log('Base de datos');
-    	console.log(db.name);
-    	console.log('abierta');
     	displayData();
     };
 
@@ -20,29 +21,27 @@ window.onload = () => {
         transaction.onerror = () => {
         	console.log('error en la transacción');
         };
-        console.log(transaction);
         var objectStore = transaction.objectStore('favoritos');
         var myIndex = objectStore.index('remedio');
-        console.log(myIndex.name);
-        console.log(myIndex.objectStore);
 
         myIndex.openCursor().onsuccess = (event) => {
-        	console.log(list);
         	var cursor = event.target.result;
         	if(cursor) {
                 var ids = cursor.value.id;
                 var rem = cursor.value.remedio;
                 var dil = cursor.value.dilucion;
                 var num = cursor.value.numero;
-                console.log(rem);
+                var keyP = cursor.primaryKey
+                par = ids + dil + num;                
                 var listItem = document.createElement('li');
-                listItem.innerHTML = '<a href="preparar-en.html?id=' + ids + '&num=' + num + '&dil=' + dil + '">'
-                                   + rem + ", " + num + "-" + dil
-                                   + '<img src="img/iconos/flecha.png" style="float: right; margin-top: 6px;">'
+                listItem.innerHTML = '<a href="preparar.html?id=' + ids + '&num=' + num + '&dil=' + dil + '">'
+                                   + rem + ", " + num + "-" + dil + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                   + '</a>'
+                                   + '<a href="javascript:;" onclick="eliminarFav(' 
+                                   + keyP
+                                   + ');" role="button"><img src="img/iconos/basura-32.png" alt="basura" type="img/png" style="float: right;">'
                                    + '</a>';
                 list.appendChild(listItem);
-                console.log('elemento imprimido');
-                console.log(listItem);
                 cursor.continue();
             } else {
                 console.log('Todos los remedios mostrados.');
@@ -52,32 +51,45 @@ window.onload = () => {
 
     // Manejador del buscador
     var filtrar = () => {
-    	console.log('entro en filtrar');
     	var transaction = db.transaction(['favoritos'], 'readonly');
     	var objectStore = transaction.objectStore('favoritos');
         var myIndex = objectStore.index('remedio');
-        console.log(myIndex);
         var texto = lectorChar.value.toLowerCase();
-        console.log(texto);
 
         myIndex.openCursor().onsuccess = (event) => {
         	var cursor = event.target.result;
         	if(cursor) {
         		var rem = cursor.value.remedio;
         		var remMin = rem.toLowerCase();
-        		console.log(remMin);
         		var id = cursor.value.id;
-        		console.log(id);
         		if(remMin.startsWith(texto) === true) {
         			location.hash = "#" + id;
-        			console.log('encontrado!!');
-        			console.log(rem);
         			document.getElementById('lectorChar').focus();
         			cursor = false;
         		}
-        	cursor.continue();
+            if(cursor) 
+        	   cursor.continue();
         	}
         };  
     };
     lectorChar.addEventListener('keyup', filtrar);
+};
+
+// botón eliminar favoritos
+function eliminarFav(keyP) {
+    keyP2 = keyP;
+    busca.style.display = "none";
+    preg.style.display = "flex";   
+};
+
+function eliminar() {
+    const request = db.transaction(['favoritos'], 'readwrite').objectStore('favoritos').delete(keyP2);
+    request.onsuccess = (event) => {
+    }
+    window.location.reload();
+}; 
+
+function restablecer() {
+    busca.style.display = "inline-flex";
+    preg.style.display = "none"
 };

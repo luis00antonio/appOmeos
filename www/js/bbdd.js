@@ -1,3 +1,4 @@
+var db;
 // Creamos el array con los datos que vamos a almacenar//
 const datosRemedios = [
     {"id":1,"remedio":"Abelmoschus "},
@@ -1525,8 +1526,6 @@ const datosRemedios = [
     {"id":1523,"remedio":"Zizia Aurea "}
 ];
 
-var db;
-
 window.onload = () => {
     console.log("Se carga la página.");
     // In the following line, you should include the prefixes of implementations you want to test.
@@ -1539,13 +1538,11 @@ window.onload = () => {
     var DBOpenRequest = window.indexedDB.open('remediosDB', 1);
 
     DBOpenRequest.onsuccess = (event) => {
-        console.log('Estoy en el evento onsuccess');
         db = DBOpenRequest.result; 
         populateData();     
     };
 
     DBOpenRequest.onupgradeneeded = (event) => {
-        console.log('Estoy en el evento onupgradeneeded');
         var db = event.target.result;
 
         db.onerror = (event) => {
@@ -1554,7 +1551,6 @@ window.onload = () => {
 
         var objectStore = db.createObjectStore('ourStore', { keyPath: 'id'});
         var indexObjectStore = objectStore.createIndex('remedio', 'remedio', {unique: true});
-        console.log('se crea la base de datos.');
         var objectStore2 = db.createObjectStore('favoritos', {autoIncrement: true});
         var index1ObjectStore2 = objectStore2.createIndex('clave', 'clave', {unique: true});
         var index2ObjectStore2 = objectStore2.createIndex('remedio', 'remedio', {unique: false});
@@ -1563,13 +1559,11 @@ window.onload = () => {
     };
 
     function populateData() {
-        console.log('estoy en populateData');
         var transaction = db.transaction(['ourStore'], 'readwrite');
         var objectStore = transaction.objectStore('ourStore');
         for(i=0; i<datosRemedios.length; i++) {
             var request = objectStore.put(datosRemedios[i]);
         };
-
 
         transaction.oncomplete = () => {
             console.log('Transacción completada');

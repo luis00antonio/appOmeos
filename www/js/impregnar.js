@@ -1,4 +1,4 @@
-var db, id, num, dil, capt;
+var db, id, num, dil;
 
 window.onload = () => {
 	 // In the following line, you should include the prefixes of implementations you want to test.
@@ -12,27 +12,20 @@ window.onload = () => {
     var DBOpenRequest = window.indexedDB.open('remediosDB', 1);
 
 	// leemos la url
-	console.log("estoy en impregnar.js");
 	const valores = window.location.search;
-	console.log(valores);
 	const urlParams = new URLSearchParams(valores);
 	id = urlParams.get('id');
-	console.log(id);
 	num = urlParams.get('num');
 	dil = urlParams.get('dil');
-    capt = urlParams.get('capt');
 
 	DBOpenRequest.onsuccess = (event) => {
     	db = DBOpenRequest.result;  
-        console.log('db vale: ');
-        console.log(db.name);
         getData();
     };
 
     function getData() {
     	ids = parseInt(id);
     	h3Impreg.innerHTML = '';
-    	console.log(ids);
     	// abrimos una transacción de solo lectura
     	var transaction = db.transaction(["ourStore"], "readonly");
     	transaction.oncomplete = (event) => {
@@ -45,18 +38,12 @@ window.onload = () => {
     	};
     	// abrimos el almacén de datos y el índice
     	var objectStore = transaction.objectStore('ourStore');
-    	console.log(objectStore);
     	var storeRequest = objectStore.get(ids);
-        console.log('storeRequest vale: ');
-        console.log(storeRequest);
         storeRequest.onsuccess = (event) => {
             const myRecord = storeRequest.result;
-            console.log(myRecord);
             rem = myRecord.remedio;
-            console.log('El remedio buscado es: ');
-            console.log(rem);
             h3Impreg.innerHTML = rem + "</br>" + num + dil;
         };    	
     };
-    setTimeout(function(){window.location="yaImpreg.html?id=" + id + "&num=" + num + "&dil=" + dil + "&capt=" + capt;}, 15000);
+    setTimeout(function(){window.location="yaImpreg.html?id=" + id + "&num=" + num + "&dil=" + dil;}, 15000);
 }

@@ -1,9 +1,10 @@
 var eligeDil = 'X';
 var eligeNum = 4;
 var eligeToma = '1';
-var id;
-var rem;
-var toma;
+var id, toma;
+const imagen1 = new Image();
+const imagen2 = new Image();
+var encoder;
 
 window.onload = () => {
     var seccion1 = document.getElementById("seccion1");
@@ -73,8 +74,6 @@ window.onload = () => {
         if (current_element_id2 != eligeDil) {
             eligeDil = current_element_id2;
         }
-        //console.log(eligeDil);
-        //console.log(rem);
     };
     document.getElementById("eligeNum").onscroll = () => {
         screenPos1 = seccion1.getBoundingClientRect();
@@ -86,12 +85,10 @@ window.onload = () => {
         if (current_element_id1 != eligeNum) {
             eligeNum = current_element_id1;
         }
-        //console.log(eligeNum);
-        //console.log(rem);
     };     
 };
 
-function prep () {
+function prep() {
     // leemos la url
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
@@ -107,11 +104,10 @@ function prepCapt() {
     const valoresCapt = window.location.search;
     const urlParamsCapt = new URLSearchParams(valoresCapt);
     var id = urlParamsCapt.get('id');
-    var capt = 'Si';
 
     // ahora metemos el id  y la variable capt en la url
     var enlaceCapt = document.getElementById("botPrepCapt");
-    enlaceCapt.href = 'impregnando-en.html?id=' + id + '&num=' + eligeNum + '&dil=' + eligeDil + '&capt=' + capt;
+    enlaceCapt.href = 'impregnando-en.html?id=' + id + '&num=' + eligeNum + '&dil=' + eligeDil;
 };
 
 function addFav() {
@@ -147,9 +143,6 @@ function addFav() {
     function addData() {
         var visto = document.getElementById("visto");
         var vis2 = document.getElementById("vis2");
-        // Creamos el nuevo objeto listo para insertar
-        // pero primero los leemos de la url y del select
-        //... y ahora leemos el select
 
         // ahora definimos el objeto que vamos a meter en el almacén 'favoritos'
         const newItem = [{
@@ -184,22 +177,22 @@ function addFav() {
 };
 
 function cambiarBotones() {
-        // abrimos una transacción de solo lectura
-        var transaction = db.transaction(["ourStore"], "readonly");
-        transaction.oncomplete = (event) => {
-            console.log('Transacción completada');
-            addData();
-        };
-        transaction.onerror = (event) => {
-            console.log('Transacción no abierta debido al error: ');
-        };
-        // abrimos el almacén de datos y el índice
-        var objectStore = transaction.objectStore('ourStore');
-        var storeRequest = objectStore.get(ids);
-        storeRequest.onsuccess = (event) => {
-            const myRecord = storeRequest.result;
-            rem = myRecord.remedio;
-        }; 
+    // abrimos una transacción de solo lectura
+    var transaction = db.transaction(["ourStore"], "readonly");
+    transaction.oncomplete = (event) => {
+        console.log('Transacción completada');
+        addData();
+    };
+    transaction.onerror = (event) => {
+        console.log('Transacción no abierta debido al error: ');
+    };
+    // abrimos el almacén de datos y el índice
+    var objectStore = transaction.objectStore('ourStore');
+    var storeRequest = objectStore.get(ids);
+    storeRequest.onsuccess = (event) => {
+        const myRecord = storeRequest.result;
+        rem = myRecord.remedio;
+    }; 
     var botonera = document.getElementById("botonera");
     var alarma = document.getElementById("alarma");
     botonera.style.display = "none";
@@ -320,5 +313,139 @@ document.addEventListener('deviceready', function () {
         // showToast('cleared all');
     });   
 }, false);
-
 app.initialize();
+
+// Crear canvas/gif para enviar por whatsapp 
+function draw() {
+    // leemos el remedio que vamos a mostrar en el gif
+    var remCanvas;
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
+    idCanvas = urlParams.get('id');
+    var transaction = db.transaction(['ourStore'], 'readonly');
+    transaction.oncomplete = (event) => {
+        console.log('Transacción completada');
+    };
+    transaction.onerror = (event) => {
+        console.log('Transacción errónea debida al error: ' + transaction.error );
+    };
+    var objectStore = transaction.objectStore('ourStore');
+    var storeRequest = objectStore.get(ids);
+    storeRequest.onsuccess = (event) => {
+        const myRecord = storeRequest.result;
+        remCanvas = myRecord.remedio;
+        console.log(remCanvas);
+    };
+
+    // dibujamos el gif
+    const ctx = document.getElementById("canvas").getContext("2d");
+    if(canvas.getContext) {         
+        imagen1.onload = () => {
+            encoder = new GIFEncoder(0,0,275,315);
+            encoder.setDelay(15000);
+            encoder.start();
+            ctx.drawImage(imagen1, 0, 0);
+            const centro = 137;
+            var texto = remCanvas;
+            var texto2 = eligeNum + " " + eligeDil;
+            ctx.beginPath();
+            ctx.font = "bold 20px sans-serif";
+            let text = ctx.measureText(texto);
+            let ancho = text.width;
+            if (ancho > 215)
+                ctx.font = "bold 16px sans-serif";
+            ctx.fillStyle = "#167007";
+            ctx.textAlign = "center";
+            ctx.fillText(texto, centro, 175);
+            ctx.beginPath();
+            ctx.fillText(texto2, centro, 200);
+            encoder.addFrame(ctx);
+            draw2(remCanvas);
+        };
+    }
+    imagen1.src = "img/iconos/impreg_01.png";
+}
+function draw2(remCanvas) {
+    const ctx = document.getElementById("canvas").getContext("2d");
+    if(canvas.getContext) {         
+        imagen2.onload = () => {
+            ctx.drawImage(imagen2, 0, 0);
+            const centro2 = 137;
+            var texto = remCanvas;
+            var texto2 = eligeNum + " " + eligeDil;
+            ctx.beginPath();
+            ctx.font = "bold 20px sans-serif";
+            let text2 = ctx.measureText(texto);
+            let ancho2 = text2.width;
+            if (ancho2 > 215) {
+                ctx.font = "bold 16px sans-serif";
+            } else {
+                ctx.font = "bold 20px sans-serif";   
+            }
+            ctx.fillStyle = "#167007";
+            ctx.textAlign = "center";
+            ctx.fillText(texto, centro2, 175);
+            ctx.beginPath();
+            ctx.fillText(texto2, centro2, 200);
+            encoder.addFrame(ctx); 
+            encoder.finish();
+
+            // Ahora guardo el gif en el dispositivo. Para que después whatsapp lo recoja y lo mande.
+            var fileType='image/gif';
+            var readableStream=encoder.stream();
+            var binary_gif=readableStream.getData();
+            binaryGif_cod = encode64(binary_gif);
+            var b64Str='data:'+fileType+';base64,'+encode64(binary_gif);
+
+            var fileTransfer = new FileTransfer();
+            var uri = b64Str;
+
+            fileTransfer.download(
+                uri,
+                '/storage/emulated/0/Android/data/www.omeos.es/files/salida.gif',
+                function(entry) {
+                    console.log("download complete: " + entry.toURL());
+                },
+                function(error) {
+                    console.log("download error source " + error.source);
+                    console.log("download error target " + error.target);
+                    console.log("download error code" + error.code);
+                },
+                false,
+                {
+                    headers: {
+                    "   Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+                    }
+                }
+            );
+
+            mandarMensaje(b64Str);
+        };
+    }
+    imagen2.src = "img/iconos/impreg_02.png";
+
+    // La función que manda el whatsapp
+    function mandarMensaje(b64Str) {
+        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+    }
+    // this is the complete list of currently supported params you can pass to the plugin (all optional)
+    var options = {
+        message: 'Prepare the glass or bottle of water and click on the picture...', // not supported on some apps (Facebook, Instagram)
+        // subject: 'the subject', // fi. for email
+        files: ['file:///storage/emulated/0/Android/data/www.omeos.es/files/salida.gif'], // an array of filenames either locally or remotely
+        //files: ['www/video/tele.mp4'],
+        //url: b64Str,
+        // chooserTitle: 'Pick an app', // Android only, you can override the default share sheet title
+        // appPackageName: 'com.apple.social.facebook', // Android only, you can provide id of the App you want to share with
+        // iPadCoordinates: '0,0,0,0' //IOS only iPadCoordinates for where the popover should be point.  Format with x,y,width,height
+    };
+
+    var onSuccess = function(result) {
+        console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+        console.log("Shared to app: " + result.app); // On Android result.app since plugin version 5.4.0 this is no longer empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+    };
+
+    var onError = function(msg) {
+        console.log("Sharing failed with message: " + msg);
+    }; 
+};

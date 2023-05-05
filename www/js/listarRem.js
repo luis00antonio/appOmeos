@@ -5,7 +5,6 @@ const hoy = Date.now();
 const fecha = new Date(hoy);
 if (fecha.getMonth() < 7) {
 window.onload = () => {
-    console.log("Se carga la página.");
     // In the following line, you should include the prefixes of implementations you want to test.
     window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
     // Moreover, you may need references to some window.IDB* objects:
@@ -43,7 +42,6 @@ window.onload = () => {
             }
         };
     };
-
 }
 // Manejador del buscador
 var filtrar = () => {
@@ -71,7 +69,6 @@ var filtrar = () => {
 };
 lectorChar.addEventListener('keyup', filtrar);
 } else {
-    console.log('estoy aqui');
     var mensj = 'App caducada. Instale la nueva versión';
     list.innerHTML = '';
     var listItem = document.createElement('li');
